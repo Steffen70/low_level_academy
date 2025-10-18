@@ -7,6 +7,15 @@ set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME}
-        src/main.c
+file(GLOB_RECURSE SRC_FILES
+        CONFIGURE_DEPENDS
+        src/*.c
+)
+
+add_executable(${PROJECT_NAME} ${SRC_FILES})
+
+target_include_directories(${PROJECT_NAME}
+        PUBLIC
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
 )
